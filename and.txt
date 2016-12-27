@@ -1,7 +1,4 @@
-1. Write a program to create an Activity to read Employee Details (EmpId, Name, Age,
-Address) from user and store to database and create a menu with menu item (Show
-Details) on pressing menu details it must go to another activity with employee id
-search box and search button and display the employee details on the screen.
+1. Write a program to create an Activity to read Employee Details (EmpId, Name, Age, Address) from user and store to database and create a menu with menu item (Show Details) on pressing menu details it must go to another activity with employee id search box and search button and display the employee details on the screen.
 Activity_main.xml
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:tools="http://schemas.android.com/tools"
@@ -40,8 +37,7 @@ android:layout_height="wrap_content"
 android:id="@+id/txt_address"/>
 <LinearLayout
 android:layout_width="wrap_content"
-
- android:layout_height="wrap_content"
+android:layout_height="wrap_content"
 android:orientation="horizontal"
 android:layout_gravity="center">
 <Button android:layout_width="fill_parent"
@@ -56,7 +52,6 @@ android:layout_gravity="center"
 android:id="@+id/btn_search"/>
 </LinearLayout>
 </LinearLayout>
-
 Search.xml
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -82,9 +77,7 @@ android:gravity="center"
 android:text="Text view"
 android:id="@+id/txt_display"/>
 </LinearLayout>
-
- Manifest.xml
-
+Manifest.xml
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 package="com.example.employeedetails"
@@ -105,44 +98,27 @@ android:label="@string/app_name" >
 <action android:name="android.intent.action.MAIN" />
 <category android:name="android.intent.category.LAUNCHER" />
 </intent-filter>
-</activity>
-<activity android:name="SearchActivity">
-</activity>
+</activity> <activity android:name="SearchActivity"> </activity>
 </application>
 </manifest>
-
 MainActivity.java
 package com.example.employeedetails;
-import
-import
-import
-import
-import
-import
-import
-import
-import
-import
-import
-
-android.os.Bundle;
-android.app.Activity;
-android.content.ContentValues;
-android.content.Intent;
-android.database.sqlite.SQLiteDatabase;
-android.view.Menu;
-android.view.View;
-android.view.View.OnClickListener;
-android.widget.Button;
-android.widget.EditText;
-android.widget.Toast;
-
+import android.os.Bundle;
+import android.app.Activity;
+import android.content.ContentValues;
+import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
+import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 public class MainActivity extends Activity implements OnClickListener {
 EditText txtid,txtname,txtage,txtaddress;
 Button btnsubmit,btnsearch;
 @Override
-
- protected void onCreate(Bundle savedInstanceState) {
+protected void onCreate(Bundle savedInstanceState) {
 super.onCreate(savedInstanceState);
 setContentView(R.layout.activity_main);
 txtid=(EditText)findViewById(R.id.txt_id);
@@ -156,8 +132,7 @@ btnsearch.setOnClickListener(this);
 }
 @Override
 public boolean onCreateOptionsMenu(Menu menu) {
-// Inflate the menu; this adds items to the action bar if it is
-present.
+// Inflate the menu; this adds items to the action bar if it is present.
 getMenuInflater().inflate(R.menu.main, menu);
 return true;
 }
@@ -167,18 +142,11 @@ public void onClick(View v) {
 Toast.makeText(this, "buttonclicked", 15000).show();
 if(v.equals(btnsubmit))
 {
-String
-String
-String
-String
-
-sid=txtid.getText().toString();
-sname=txtname.getText().toString();
-sage=txtage.getText().toString();
-saddress=txtaddress.getText().toString();
-
-MyDatabase dat=new
-MyDatabase(this,MyDatabase.DATABASE_NAME, null, 1);
+String sid=txtid.getText().toString();
+String sname=txtname.getText().toString();
+String sage=txtage.getText().toString();
+String saddress=txtaddress.getText().toString();
+MyDatabase dat=new MyDatabase(this,MyDatabase.DATABASE_NAME, null, 1);
 SQLiteDatabase database=dat.getWritableDatabase();
 ContentValues cv= new ContentValues();
 cv.put("id", sid);
@@ -187,8 +155,7 @@ cv.put("age",sage );
 cv.put("address", saddress);
 database.insert("Employee", null, cv);
 database.close();
-Toast.makeText(this, "Data Inserted successfully",
-15000).show();
+Toast.makeText(this, "Data Inserted successfully", 15000).show();
 }
 else if(v.equals(btnsearch))
 {
@@ -196,21 +163,13 @@ Intent it=new Intent(this,SearchActivity.class);
 startActivity(it);
 }
 }
-
- }
-
+}
 MyDatabase.java
 package com.example.employeedetails;
-import
-import
-import
-import
-
-android.content.Context;
-android.database.sqlite.SQLiteDatabase;
-android.database.sqlite.SQLiteDatabase.CursorFactory;
-android.database.sqlite.SQLiteOpenHelper;
-
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteDatabase.CursorFactory;
+import android.database.sqlite.SQLiteOpenHelper;
 public class MyDatabase extends SQLiteOpenHelper
 {
 public static String DATABASE_NAME="Employee.db";
@@ -223,36 +182,24 @@ super(context, name, factory, version);
 @Override
 public void onCreate(SQLiteDatabase db) {
 // TODO Auto-generated method stub
-db.execSQL("create table employee (id TEXT,name TEXT,age
-TEXT,address TEXT)");
+db.execSQL("create table employee (id TEXT,name TEXT,age TEXT,address TEXT)");
 }
 @Override
 public void onUpgrade(SQLiteDatabase arg0, int arg1, int arg2) {
 // TODO Auto-generated method stub
 }
 }
-
 SearchActivity.java
 package com.example.employeedetails;
-import
-import
-import
-import
-import
-import
-import
-import
-
-android.app.Activity;
-android.database.Cursor;
-android.database.sqlite.SQLiteDatabase;
-android.os.Bundle;
-android.view.View;
-android.view.View.OnClickListener;
-android.widget.Button;
-android.widget.EditText;
-
- import android.widget.TextView;
+import android.app.Activity;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 public class SearchActivity extends Activity implements OnClickListener{
 EditText txtempid;
@@ -274,44 +221,35 @@ Toast.makeText(this, "Button clicked", 15000).show();
 if(v.equals(btnsearch))
 {
 String eid=txtempid.getText().toString();
-MyDatabase dat=new MyDatabase(this, MyDatabase.DATABASE_NAME,
-null, 1);
+MyDatabase dat=new MyDatabase(this, MyDatabase.DATABASE_NAME, null, 1);
 SQLiteDatabase database=dat.getReadableDatabase();
 String[] columns=new String[] {"id","name","age","address"};
 String where="id=?";
 String[] value= new String[]{eid.trim()};
-Cursor cu=database.query(MyDatabase.EMPLOYEE_TABLE, columns,
-where , value, null, null, null);
+Cursor cu=database.query(MyDatabase.EMPLOYEE_TABLE, columns, where , value, null, null, null);
 txtdisplay.setText("");
 if(cu.moveToNext())
 {
-String
-String
-String
-String
-
-id=cu.getString(0);
-name=cu.getString(1);
-age=cu.getString(2);
-address=cu.getString(3);
-
-txtdisplay.append(id+ " " +name+ " "+age+ "
-"+address+"\n");
+String id=cu.getString(0);
+String name=cu.getString(1);
+String age=cu.getString(2);
+String address=cu.getString(3);
+txtdisplay.append(id+ " " +name+ " "+age+ " "+address+"\n");
 }
 else
 {
 Toast.makeText(this, "No Id Exist", 15000).show();
+}
+}
+}
+}
 
- }
-}
-}
-}
 
- 2. Write a program to create an activity with a text box and three buttons (save, open
-and create) open must allow to browse the text file from sdcard and must display the
-contents of the file on textbox, save button must save the contents of text box to file,
-create button must allow file user to create a new file and save the entered contents
-of the textbox.
+
+
+
+
+2. Write a program to create an activity with a text box and three buttons (save, open and create) open must allow to browse the text file from sdcard and must display the contents of the file on textbox, save button must save the contents of text box to file, create button must allow file user to create a new file and save the entered contents of the textbox.
 Activity_main.xml
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:tools="http://schemas.android.com/tools"
@@ -349,24 +287,20 @@ android:layout_height="wrap_content"
 android:text="Save"
 android:layout_gravity="center"
 android:id="@+id/btn_save"/>
-
- </LinearLayout>
-
+</LinearLayout>
 Dialog_layout.xml
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:orientation="vertical" >
-<TextView
-android:layout_width="match_parent"
+<TextView android:layout_width="match_parent"
 android:layout_height="wrap_content"
 android:text="Enter File Name"/>
 <EditText android:layout_width="match_parent"
 android:layout_height="wrap_content"
 android:id="@+id/txt_filename"/>
 </LinearLayout>
-
 Manifest.xml
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
@@ -375,9 +309,7 @@ android:versionCode="1"
 android:versionName="1.0" >
 <uses-sdk
 android:minSdkVersion="8"
-android:targetSdkVersion="18" />
-<uses-permission
-android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+android:targetSdkVersion="18" /> <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 <application
 android:allowBackup="true"
 android:icon="@drawable/ic_launcher"
@@ -393,51 +325,27 @@ android:label="@string/app_name" >
 </activity>
 </application>
 </manifest>
-
- MainActivity.java
+MainActivity.java
 package com.example.p2;
-import
-import
-import
-import
-import
-import
-import
-
-java.io.BufferedReader;
-java.io.File;
-java.io.FileInputStream;
-java.io.FileOutputStream;
-java.io.IOException;
-java.io.InputStreamReader;
-java.io.OutputStreamWriter;
-
-import
-import
-import
-import
-import
-import
-import
-import
-import
-import
-import
-import
-
-android.os.Bundle;
-android.app.Activity;
-android.app.AlertDialog;
-android.content.DialogInterface;
-android.content.Intent;
-android.view.Menu;
-android.view.View;
-android.view.View.OnClickListener;
-android.widget.Button;
-android.widget.EditText;
-android.widget.TextView;
-android.widget.Toast;
-
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import android.os.Bundle;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 public class MainActivity extends Activity implements OnClickListener {
 TextView lblFile;
 EditText txtContent;
@@ -457,12 +365,10 @@ btnSave=(Button)findViewById(R.id.btn_save);
 btnSave.setOnClickListener(this);
 btnOpen=(Button)findViewById(R.id.btn_open);
 btnOpen.setOnClickListener(this);
-
- }
+}
 @Override
 public boolean onCreateOptionsMenu(Menu menu) {
-// Inflate the menu; this adds items to the action bar if it is
-present.
+// Inflate the menu; this adds items to the action bar if it is present.
 getMenuInflater().inflate(R.menu.main, menu);
 return true;
 }
@@ -479,34 +385,28 @@ lblFile.setText(filepath+"/"+filename);
 }
 else
 {
-Toast.makeText(this,"Wrong Choice of File",
-Toast.LENGTH_LONG).show();
+Toast.makeText(this,"Wrong Choice of File", Toast.LENGTH_LONG).show();
 }
 }
 public void writeToFile(String path,String filename)
 {
 try {
-FileOutputStream fileout=new FileOutputStream(new
-File(path+"/"+filename));
+FileOutputStream fileout=new FileOutputStream(new File(path+"/"+filename));
 fileout.write(txtContent.getText().toString().getBytes());
 fileout.close();
 //display file saved message
-Toast.makeText(getBaseContext(), "File Saved
-successfully!",
+Toast.makeText(getBaseContext(), "File Saved successfully!",
 Toast.LENGTH_SHORT).show();
 } catch (Exception e) {
 Toast.makeText(getBaseContext(), e.getLocalizedMessage(),
 Toast.LENGTH_SHORT).show();
 }
 }
-
- public void readFromFile(String path,String filename)
+public void readFromFile(String path,String filename)
 {
 try {
-FileInputStream fileIn=new
-FileInputStream(path+"/"+filename);
-InputStreamReader inputReader= new
-InputStreamReader(fileIn);
+FileInputStream fileIn=new FileInputStream(path+"/"+filename);
+InputStreamReader inputReader= new InputStreamReader(fileIn);
 BufferedReader br=new BufferedReader(inputReader);
 String data=br.readLine();
 while(data!=null)
@@ -523,15 +423,13 @@ Toast.LENGTH_SHORT).show();
 public void onShowCreateDialog()
 {
 AlertDialog.Builder builder=new AlertDialog.Builder(this);
-final View
-dialogView=getLayoutInflater().inflate(R.layout.dialog_layout, null);
+final View dialogView=getLayoutInflater().inflate(R.layout.dialog_layout, null);
 builder.setView(dialogView);
 builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 @Override
 public void onClick(DialogInterface arg0, int arg1) {
 // TODO Auto-generated method stub
-EditText
-txtFilename=(EditText)dialogView.findViewById(R.id.txt_filename);
+EditText txtFilename=(EditText)dialogView.findViewById(R.id.txt_filename);
 filepath="/data";
 filename=txtFilename.getText().toString();
 File f=new File(filepath+"/"+filename);
@@ -539,8 +437,7 @@ try {
 f.createNewFile();
 } catch (IOException e) {
 // TODO Auto-generated catch block
-Toast.makeText(getBaseContext(),
-""+e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+Toast.makeText(getBaseContext(), ""+e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
 }
 lblFile.setText(filepath+"/"+filename);
 }
@@ -549,8 +446,7 @@ builder.setNegativeButton("Cancel", null);
 AlertDialog dialog=builder.create();
 dialog.show();
 }
-
- @Override
+@Override
 public void onClick(View v) {
 // TODO Auto-generated method stub
 if(v.equals(btnOpen))
@@ -571,11 +467,10 @@ writeToFile(filepath, filename);
 }
 }
 
- 3. Write a program to create an activity with two text boxes (date /time and note
-contents). Create a content provider to store the date and time and note contents to
-the database. Create another program with a Button (Fetch Today Notes) on press
-must access the note provider and display the notes stored for today’s date.
 
+
+
+3. Write a program to create an activity with two text boxes (date /time and note contents). Create a content provider to store the date and time and note contents to the database. Create another program with a Button (Fetch Today Notes) on press must access the note provider and display the notes stored for today’s date.
 Content Provider part
 Activity_main.xml
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -608,13 +503,11 @@ android:layout_height="wrap_content"
 android:text="Add Note"
 android:id="@+id/btn_add_note" />
 </LinearLayout>
-
 Manifest.xml
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 package="com.example.p3noteprovider"
-
- android:versionCode="1"
+android:versionCode="1"
 android:versionName="1.0" >
 <uses-sdk
 android:minSdkVersion="8"
@@ -632,38 +525,22 @@ android:label="@string/app_name" >
 <category android:name="android.intent.category.LAUNCHER" />
 </intent-filter>
 </activity>
-<provider android:name="NotesProvider"
-android:authorities="com.example.notesprovider"
-android:exported="true"/>
+<provider android:name="NotesProvider" android:authorities="com.example.notesprovider" android:exported="true"/>
 </application>
 </manifest>
-
 MainActivity.java
 package com.example.p3noteprovider;
-import
-import
-import
-import
-import
-import
-import
-import
-import
-import
-import
-
-android.net.Uri;
-android.os.Bundle;
-android.app.Activity;
-android.content.ContentResolver;
-android.content.ContentValues;
-android.view.Menu;
-android.view.View;
-android.view.View.OnClickListener;
-android.widget.Button;
-android.widget.EditText;
-android.widget.Toast;
-
+import android.net.Uri;
+import android.os.Bundle;
+import android.app.Activity;
+import android.content.ContentResolver;
+import android.content.ContentValues;
+import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 public class MainActivity extends Activity implements OnClickListener {
 EditText txtDate,txtContent;
 Button btnAddNote;
@@ -671,16 +548,14 @@ Button btnAddNote;
 protected void onCreate(Bundle savedInstanceState) {
 super.onCreate(savedInstanceState);
 setContentView(R.layout.activity_main);
-
- txtDate=(EditText)findViewById(R.id.txt_date);
+txtDate=(EditText)findViewById(R.id.txt_date);
 txtContent=(EditText)findViewById(R.id.txt_Content);
 btnAddNote=(Button)findViewById(R.id.btn_add_note);
 btnAddNote.setOnClickListener(this);
 }
 @Override
 public boolean onCreateOptionsMenu(Menu menu) {
-// Inflate the menu; this adds items to the action bar if it is
-present.
+// Inflate the menu; this adds items to the action bar if it is present.
 getMenuInflater().inflate(R.menu.main, menu);
 return true;
 }
@@ -695,35 +570,22 @@ ContentValues values = new ContentValues();
 values.put("note_date",sdate);
 values.put("content",scontent);
 ContentResolver cresolver=getContentResolver();
-cresolver.insert(Uri.parse("content://com.example.notesprovider/notes"),
-values);
-Toast.makeText(getBaseContext(),"Data Inserted
-Successfully", Toast.LENGTH_LONG).show();
+cresolver.insert(Uri.parse("content://com.example.notesprovider/notes"), values);
+Toast.makeText(getBaseContext(),"Data Inserted Successfully", Toast.LENGTH_LONG).show();
 }
 }
 }
-
 NotesProvider.java
 package com.example.p3noteprovider;
-import
-import
-import
-import
-import
-import
-import
-import
-
-android.content.ContentProvider;
-android.content.ContentValues;
-android.content.Context;
-android.content.UriMatcher;
-android.database.Cursor;
-android.database.sqlite.SQLiteDatabase;
-android.database.sqlite.SQLiteQueryBuilder;
-android.net.Uri;
-
- public class NotesProvider extends ContentProvider
+import android.content.ContentProvider;
+import android.content.ContentValues;
+import android.content.Context;
+import android.content.UriMatcher;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteQueryBuilder;
+import android.net.Uri;
+public class NotesProvider extends ContentProvider
 {
 static final String URL = "content://com.example.notesprovider/notes";
 SQLiteDatabase db;
@@ -749,8 +611,7 @@ return null;
 @Override
 public boolean onCreate() {
 // TODO Auto-generated method stub
-dbHelper= new
-ProviderDatabase(getContext(),ProviderDatabase.DATABASE_NAME+".db",null,1);
+dbHelper= new ProviderDatabase(getContext(),ProviderDatabase.DATABASE_NAME+".db",null,1);
 return (db == null)? false:true;
 }
 @Override
@@ -758,57 +619,28 @@ public Cursor query(Uri uri, String[] arg1, String arg2, String[] arg3,
 String arg4) {
 // TODO Auto-generated method stub
 Cursor cursor=null;
-
 db = dbHelper.getReadableDatabase();
-cursor =
-db.query(ProviderDatabase.TABLE_NAME,arg1,arg2,arg3,arg4,null,null);
-
- return cursor;
+cursor = db.query(ProviderDatabase.TABLE_NAME,arg1,arg2,arg3,arg4,null,null);
+return cursor;
 }
 @Override
-public int update(Uri arg0, ContentValues arg1, String arg2, String[]
-arg3) {
+public int update(Uri arg0, ContentValues arg1, String arg2, String[] arg3) {
 // TODO Auto-generated method stub
 return 0;
 }
-
 }
-
 ProviderDatabase.java
 package com.example.p3noteprovider;
-import
-import
-import
-import
-
-android.content.Context;
-android.database.sqlite.SQLiteDatabase;
-android.database.sqlite.SQLiteDatabase.CursorFactory;
-android.database.sqlite.SQLiteOpenHelper;
-
-public class
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteDatabase.CursorFactory;
+import android.database.sqlite.SQLiteOpenHelper;
+public class ProviderDatabase extends SQLiteOpenHelper
 {
-public
-public
-public
-public
-
-ProviderDatabase extends SQLiteOpenHelper
-static
-static
-static
-static
-
-String
-String
-String
-String
-
-DATABASE_NAME="noteprovider";
-TABLE_NAME="notes";
-COLUMN_DATE="note_date";
-COLUMN_NOTE="content";
-
+public static String DATABASE_NAME="noteprovider";
+public static String TABLE_NAME="notes";
+public static String COLUMN_DATE="note_date";
+public static String COLUMN_NOTE="content";
 public ProviderDatabase(Context context, String name,
 CursorFactory factory, int version) {
 super(context, name, factory, version);
@@ -823,9 +655,7 @@ db.execSQL("create table notes (note_date TEXT,content TEXT)");
 public void onUpgrade(SQLiteDatabase db, int arg1, int arg2) {
 // TODO Auto-generated method stub
 }
-
- }
-
+}
 Content Resolver part
 Activity_main.xml
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -839,8 +669,7 @@ android:gravity="center">
 android:layout_width="match_parent"
 android:layout_height="wrap_content"
 android:text="Enter Date to Search"/>
-<EditText
-android:layout_width="match_parent"
+<EditText android:layout_width="match_parent"
 android:layout_height="wrap_content"
 android:id="@+id/txt_search"/>
 <Button android:layout_width="match_parent"
@@ -853,7 +682,6 @@ android:layout_height="wrap_content"
 android:text="Data To Show"
 android:id="@+id/lbl_message"/>
 </LinearLayout>
-
 Manifest.xml
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
@@ -865,8 +693,7 @@ android:minSdkVersion="8"
 android:targetSdkVersion="18" />
 <application
 android:allowBackup="true"
-
- android:icon="@drawable/ic_launcher"
+android:icon="@drawable/ic_launcher"
 android:label="@string/app_name"
 android:theme="@style/AppTheme" >
 <activity
@@ -879,35 +706,20 @@ android:label="@string/app_name" >
 </activity>
 </application>
 </manifest>
-
 MainActivity.java
 package com.example.p3providerclient;
-import
-import
-import
-import
-import
-import
-import
-import
-import
-import
-import
-import
-
-android.net.Uri;
-android.os.Bundle;
-android.app.Activity;
-android.content.ContentValues;
-android.database.Cursor;
-android.view.Menu;
-android.view.View;
-android.view.View.OnClickListener;
-android.widget.Button;
-android.widget.EditText;
-android.widget.TextView;
-android.widget.Toast;
-
+import android.net.Uri;
+import android.os.Bundle;
+import android.app.Activity;
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 public class MainActivity extends Activity implements OnClickListener {
 EditText txtSearch;
 Button btnSearch;
@@ -923,9 +735,7 @@ btnSearch.setOnClickListener(this);
 }
 @Override
 public boolean onCreateOptionsMenu(Menu menu) {
-
-// Inflate the menu; this adds items to the action bar if it is
-present.
+// Inflate the menu; this adds items to the action bar if it is present.
 getMenuInflater().inflate(R.menu.main, menu);
 return true;
 }
@@ -936,10 +746,7 @@ if(v.equals(btnSearch))
 {
 String searchDate=txtSearch.getText().toString();
 String where="note_date=?";
-Cursor
-cursor=getContentResolver().query(Uri.parse("content://com.example.notesprovi
-der/notes"),new String[]{"note_date","content"},where, new
-String[]{searchDate},null);
+Cursor cursor=getContentResolver().query(Uri.parse("content://com.example.notesprovider/notes"),new String[]{"note_date","content"},where, new String[]{searchDate},null);
 if(cursor!=null&&cursor.moveToNext())
 {
 String ndate=cursor.getString(0);
@@ -948,16 +755,22 @@ lblMessage.setText(ndate+" "+content+"\n");
 }
 else
 {
-Toast.makeText(getBaseContext(),"No Data Available",
-Toast.LENGTH_LONG).show();
+Toast.makeText(getBaseContext(),"No Data Available", Toast.LENGTH_LONG).show();
 }
 }
 }
 }
 
- 4. Create a program to create an activity with two buttons start and stop. On pressing
-start button the program must start the counter and must keep on counting until stop
-button is pressed.
+
+
+
+
+
+
+
+
+
+4. Create a program to create an activity with two buttons start and stop. On pressing start button the program must start the counter and must keep on counting until stop button is pressed.
 Activity_main.xml
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:tools="http://schemas.android.com/tools"
@@ -982,7 +795,6 @@ android:text="@string/stop"
 android:layout_gravity="center"
 android:id="@+id/btn_stop"/>
 </LinearLayout>
-
 Manifest.xml
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
@@ -997,8 +809,7 @@ android:allowBackup="true"
 android:icon="@drawable/ic_launcher"
 android:label="@string/app_name"
 android:theme="@style/AppTheme" >
-
- <activity
+<activity
 android:name="com.example.p4.MainActivity"
 android:label="@string/app_name" >
 <intent-filter>
@@ -1008,31 +819,18 @@ android:label="@string/app_name" >
 </activity>
 </application>
 </manifest>
-
 MainActivity.java
 package com.example.p4;
-import
-import
-import
-import
-import
-import
-import
-import
-import
-
-android.os.Bundle;
-android.os.Handler;
-android.os.Message;
-android.app.Activity;
-android.view.Menu;
-android.view.View;
-android.view.View.OnClickListener;
-android.widget.Button;
-android.widget.TextView;
-
-public class MainActivity extends Activity implements OnClickListener,
-Runnable{
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.app.Activity;
+import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.TextView;
+public class MainActivity extends Activity implements OnClickListener, Runnable{
 int i=0;
 TextView lblcounter;
 Button btnstart,btnstop;
@@ -1050,9 +848,7 @@ lblcounter=(TextView)findViewById(R.id.lbl_counter);
 }
 @Override
 public boolean onCreateOptionsMenu(Menu menu) {
-
- // Inflate the menu; this adds items to the action bar if it is
-present.
+// Inflate the menu; this adds items to the action bar if it is present.
 getMenuInflater().inflate(R.menu.main, menu);
 return true;
 }
@@ -1097,9 +893,13 @@ i++;
 }
 }
 
- 5. Create a program to receive the incoming SMS to the phone and put a notification on
-screen, on clicking the notification it must display sender number and message
-content on screen. (Broadcast Receiver)
+
+
+
+
+
+
+5. Create a program to receive the incoming SMS to the phone and put a notification on screen, on clicking the notification it must display sender number and message content on screen. (Broadcast Receiver)
 Activity_main.xml
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:tools="http://schemas.android.com/tools"
@@ -1119,7 +919,6 @@ android:layout_height="wrap_content"
 android:text="Message content"
 android:id="@+id/lbl_message"/>
 </LinearLayout>
-
 Manifest.xml
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
@@ -1140,30 +939,17 @@ android:name="com.example.p5.MainActivity"
 android:label="@string/app_name" >
 <intent-filter>
 <action android:name="android.intent.action.MAIN" />
-
- <category android:name="android.intent.category.LAUNCHER" />
+<category android:name="android.intent.category.LAUNCHER" />
 </intent-filter>
-</activity>
-<receiver android:name="com.example.p5.MySmsReceiver">
-<intent-filter>
-<action android:name="android.provider.Telephony.SMS_RECEIVED"/>
-</intent-filter>
-</receiver>
+</activity> <receiver android:name="com.example.p5.MySmsReceiver"> <intent-filter> <action android:name="android.provider.Telephony.SMS_RECEIVED"/> </intent-filter> </receiver>
 </application>
 </manifest>
-
 MainActivity,java
 package com.example.p5;
-import
-import
-import
-import
-
-android.os.Bundle;
-android.app.Activity;
-android.view.Menu;
-android.widget.TextView;
-
+import android.os.Bundle;
+import android.app.Activity;
+import android.view.Menu;
+import android.widget.TextView;
 public class MainActivity extends Activity {
 TextView lblnumber,lblmessage;
 @Override
@@ -1183,28 +969,18 @@ lblmessage.setText(content);
 }
 @Override
 public boolean onCreateOptionsMenu(Menu menu) {
-// Inflate the menu; this adds items to the action bar if it is
-present.
+// Inflate the menu; this adds items to the action bar if it is present.
 getMenuInflater().inflate(R.menu.main, menu);
 return true;
 }
 }
-
- MySmsReceiver.java
-
+MySmsReceiver.java
 package com.example.p5;
-import
-import
-import
-import
-import
-
-android.content.BroadcastReceiver;
-android.content.Context;
-android.content.Intent;
-android.os.Bundle;
-android.telephony.SmsMessage;
-
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.telephony.SmsMessage;
 public class MySmsReceiver extends BroadcastReceiver{
 @Override
 public void onReceive(Context arg0, Intent arg1) {
@@ -1212,8 +988,7 @@ public void onReceive(Context arg0, Intent arg1) {
 Object[] objmessages=(Object[])arg1.getExtras().get("pdus");
 for(int i=0; i<objmessages.length;i++)
 {
-SmsMessage
-m=SmsMessage.createFromPdu((byte[])objmessages[i]);
+SmsMessage m=SmsMessage.createFromPdu((byte[])objmessages[i]);
 Bundle b1=new Bundle();
 b1.putString("number", m.getOriginatingAddress());
 b1.putString("content", m.getMessageBody());
@@ -1226,16 +1001,24 @@ break;
 }
 }
 
- 6. Create a program to create a service that will put a notification on the screen every 5
-seconds.
+
+
+
+
+
+
+
+
+
+
+6. Create a program to create a service that will put a notification on the screen every 5 seconds.
 Activity_main.xml
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:orientation="vertical"
-android:gravity="center"
->
+android:gravity="center" >
 <Button android:layout_width="wrap_content"
 android:layout_height="wrap_content"
 android:text="Start Notification"
@@ -1247,7 +1030,6 @@ android:text="Stop Notification"
 android:layout_gravity="center"
 android:id="@+id/btn_stop"/>
 </LinearLayout>
-
 Manifest.xml
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
@@ -1270,31 +1052,19 @@ android:label="@string/app_name" >
 <category android:name="android.intent.category.LAUNCHER" />
 </intent-filter>
 </activity>
-
- <service android:name="ServiceClass"></service>
+<service android:name="ServiceClass"></service>
 </application>
 </manifest>
-
 MainActivity.java
 package com.example.p6;
-import
-import
-import
-import
-import
-import
-import
-import
-
-android.os.Bundle;
-android.app.Activity;
-android.content.Intent;
-android.view.Menu;
-android.view.View;
-android.view.View.OnClickListener;
-android.widget.Button;
-android.widget.Toast;
-
+import android.os.Bundle;
+import android.app.Activity;
+import android.content.Intent;
+import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.Toast;
 public class MainActivity extends Activity implements OnClickListener{
 Button btnstart,btnstop;
 @Override
@@ -1308,8 +1078,7 @@ btnstop.setOnClickListener(this);
 }
 @Override
 public boolean onCreateOptionsMenu(Menu menu) {
-// Inflate the menu; this adds items to the action bar if it is
-present.
+// Inflate the menu; this adds items to the action bar if it is present.
 getMenuInflater().inflate(R.menu.main, menu);
 return true;
 }
@@ -1324,57 +1093,39 @@ b.putBoolean("stop", true);
 it.putExtra("data", b);
 startService(it);
 }
-
- else
+else
 {
 /*Intent it=new Intent(this,ServiceClass.class);
 Bundle b=new Bundle();
 b.putBoolean("stop", false);
 it.putExtra("data", b);
-startService(it);To stop the notification but it will not
-stop the service, to stop we use stoService()*/
+startService(it);To stop the notification but it will not stop the service, to stop we use stoService()*/
 Intent it=new Intent(this,ServiceClass.class);
 stopService(it);
 }
 }
 }
-
 ServiceClass.java
 package com.example.p6;
-import
-import
-import
-import
-import
-import
-import
-import
-import
-import
-import
-import
-
-android.app.Notification;
-android.app.NotificationManager;
-android.app.PendingIntent;
-android.app.Service;
-android.content.Intent;
-android.os.Bundle;
-android.os.Handler;
-android.os.IBinder;
-android.os.Message;
-android.support.v4.app.NotificationCompat;
-android.view.ViewDebug.FlagToString;
-android.widget.Toast;
-
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.Service;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Message;
+import android.support.v4.app.NotificationCompat;
+import android.view.ViewDebug.FlagToString;
+import android.widget.Toast;
 public class ServiceClass extends Service{
 boolean running=false;
 MyThread thread;
 public void onCreate()
 {
 super.onCreate();
-Toast.makeText(getBaseContext(), "Service Created",
-Toast.LENGTH_LONG).show();
+Toast.makeText(getBaseContext(), "Service Created", Toast.LENGTH_LONG).show();
 running=true;
 thread=new MyThread();
 thread.start();
@@ -1382,11 +1133,9 @@ thread.start();
 public int onStartCommand(Intent intent, int flags,int startId)
 {
 super.onStartCommand(intent, flags, startId);
-Toast.makeText(getBaseContext(), "Service started",
-Toast.LENGTH_LONG).show();
+Toast.makeText(getBaseContext(), "Service started", Toast.LENGTH_LONG).show();
 Bundle b=intent.getBundleExtra("data");
-
- running=b.getBoolean("stop");
+running=b.getBoolean("stop");
 if(!thread.isAlive())
 {
 thread=new MyThread();
@@ -1402,23 +1151,19 @@ return null;
 public void onDestroy()
 {
 running=false;
-Toast.makeText(getBaseContext(), "Service stoped",
-Toast.LENGTH_LONG).show();
+Toast.makeText(getBaseContext(), "Service stoped", Toast.LENGTH_LONG).show();
 super.onDestroy();
 }
 Handler hand=new Handler()
 {
 public void handleMessage(Message m)
 {
-NotificationManager
-manager=(NotificationManager)getSystemService(NOTIFICATION_SERVICE);
-NotificationCompat.Builder builder=new
-NotificationCompat.Builder(getBaseContext());
+NotificationManager manager=(NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+NotificationCompat.Builder builder=new NotificationCompat.Builder(getBaseContext());
 builder.setContentTitle("From Service");
 builder.setContentText("Hai " +m.what);
 builder.setSmallIcon(R.drawable.ic_launcher);
-builder.setContentIntent(PendingIntent.getActivity(getBaseContext(), 1,
-new Intent(getBaseContext(),MainActivity.class),1));
+builder.setContentIntent(PendingIntent.getActivity(getBaseContext(), 1, new Intent(getBaseContext(),MainActivity.class),1));
 Notification nof=builder.build();
 manager.notify(100, nof);
 }
@@ -1434,8 +1179,7 @@ try {
 Thread.sleep(5000);
 } catch (InterruptedException e) {
 // TODO Auto-generated catch block
-
- e.printStackTrace();
+e.printStackTrace();
 }
 hand.sendEmptyMessage(i++);
 }
@@ -1443,12 +1187,23 @@ hand.sendEmptyMessage(i++);
 }
 }
 
- 7. Create an .aidl service to do add, subtraction and multiplication and create another
-application with two buttons to read the inputs and three button add,subtract and
-multiply to call add,subtract and multiply operation on .aidl service.
+
+
+
+
+
+
+
+
+
+
+
+
+7. Create an .aidl service to do add, subtraction and multiplication and create another application with two buttons to read the inputs and three button add,subtract and multiply to call add,subtract and multiply operation on .aidl service.
 Part-1 (has an empty layout)
 Activity_main.xml
--NAManifest.xml
+-NA-
+Manifest.xml
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 package="com.example.p7"
@@ -1469,40 +1224,25 @@ android:label="@string/app_name" >
 <action android:name="android.intent.action.MAIN" />
 <category android:name="android.intent.category.LAUNCHER" />
 </intent-filter>
-</activity>
-<service
-android:name="MyCalService">
-<intent-filter>
-<action android:name="com.simple.cal"/>
-</intent-filter>
-</service>
+</activity> <service android:name="MyCalService"> <intent-filter> <action android:name="com.simple.cal"/> </intent-filter> </service>
 </application>
 </manifest>
-
 Calculator.aidl
 Create a new package and under this, new-> file-> save with .aidl extension
-
- package com.example.cal;
+package com.example.cal;
 interface calculator
 {
 int add(int a, int b);
 int sub(int a, int b);
 int mul(int a, int b);
 }
-
 MyCalService.java
 package com.example.p7;
 import com.example.cal.calculator;
-import
-import
-import
-import
-
-android.app.Service;
-android.content.Intent;
-android.os.IBinder;
-android.os.RemoteException;
-
+import android.app.Service;
+import android.content.Intent;
+import android.os.IBinder;
+import android.os.RemoteException;
 public class MyCalService extends Service{
 @Override
 public IBinder onBind(Intent arg0) {
@@ -1527,11 +1267,9 @@ return a+b;
 }
 };
 }
-
 Part-2
 Activity_main.xml
-
- <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
@@ -1578,8 +1316,7 @@ android:layout_gravity="center"
 android:id="@+id/btn_mul"/>
 </LinearLayout>
 </LinearLayout>
-
- Manifest.xml
+Manifest.xml
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 package="com.example.p7_1"
@@ -1603,7 +1340,6 @@ android:label="@string/app_name" >
 </activity>
 </application>
 </manifest>
-
 Calculator.aidl
 Create a new package and under this, new-> file-> save with .aidl extension
 package com.example.cal;
@@ -1613,43 +1349,24 @@ int add(int a, int b);
 int sub(int a, int b);
 int mul(int a, int b);
 }
-
 MainActivity.java
 package com.example.p7_1;
 import com.example.cal.calculator;
-
- import
-import
-import
-import
-import
-import
-import
-import
-import
-import
-import
-import
-import
-import
-
-android.os.Bundle;
-android.os.IBinder;
-android.os.RemoteException;
-android.app.Activity;
-android.content.ComponentName;
-android.content.Intent;
-android.content.ServiceConnection;
-android.view.Menu;
-android.view.View;
-android.view.View.OnClickListener;
-android.widget.Button;
-android.widget.EditText;
-android.widget.TextView;
-android.widget.Toast;
-
-public class MainActivity extends Activity implements OnClickListener,
-ServiceConnection{
+import android.os.Bundle;
+import android.os.IBinder;
+import android.os.RemoteException;
+import android.app.Activity;
+import android.content.ComponentName;
+import android.content.Intent;
+import android.content.ServiceConnection;
+import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+public class MainActivity extends Activity implements OnClickListener, ServiceConnection{
 EditText txtfirst, txtsecond;
 Button btnadd,btnsub,btnmul;
 TextView txtresult;
@@ -1671,8 +1388,7 @@ bindService(new Intent("com.simple.cal"), this, BIND_AUTO_CREATE);
 }
 @Override
 public boolean onCreateOptionsMenu(Menu menu) {
-// Inflate the menu; this adds items to the action bar if it is
-present.
+// Inflate the menu; this adds items to the action bar if it is present.
 getMenuInflater().inflate(R.menu.main, menu);
 return true;
 }
@@ -1681,8 +1397,7 @@ public void onClick(View v) {
 // TODO Auto-generated method stub
 String s1=txtfirst.getText().toString();
 String s2=txtsecond.getText().toString();
-
- int a=Integer.parseInt(s1);
+int a=Integer.parseInt(s1);
 int b=Integer.parseInt(s2);
 if(v.equals(btnadd))
 {
@@ -1718,8 +1433,7 @@ e.printStackTrace();
 @Override
 public void onServiceConnected(ComponentName arg0, IBinder arg1) {
 // TODO Auto-generated method stub
-Toast.makeText(getBaseContext(), "Service Connected",
-Toast.LENGTH_LONG).show();
+Toast.makeText(getBaseContext(), "Service Connected", Toast.LENGTH_LONG).show();
 cal=(calculator)calculator.Stub.asInterface(arg1);
 }
 @Override
@@ -1728,4 +1442,1076 @@ public void onServiceDisconnected(ComponentName arg0) {
 }
 }
 
- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+prog 8
+package com.example.p8;
+
+import android.net.Uri;
+import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.app.Activity;
+import android.content.Intent;
+import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+
+public class MainActivity extends Activity implements OnClickListener {
+	
+	EditText txtNumber;
+	
+	Button btnOne,btnTwo,btnThree,btnFour,btnFive,btnSix,btnSeven,btnEight,btnNine,btnZero,btnCall,btnSave,btnDel,btnStar,btnHash;
+	
+	
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        
+        txtNumber=(EditText)findViewById(R.id.txt_display);
+        
+        btnOne=(Button)findViewById(R.id.btn_one);
+        btnOne.setOnClickListener(this);
+        
+        btnTwo=(Button)findViewById(R.id.btn_two);
+        btnTwo.setOnClickListener(this);
+        
+        btnThree=(Button)findViewById(R.id.btn_three);
+        btnThree.setOnClickListener(this);
+        
+        btnFour=(Button)findViewById(R.id.btn_four);
+        btnFour.setOnClickListener(this);
+        
+        btnFive=(Button)findViewById(R.id.btn_five);
+        btnFive.setOnClickListener(this);
+        
+        
+        btnSix=(Button)findViewById(R.id.btn_six);
+        btnSix.setOnClickListener(this);
+        
+        btnSeven=(Button)findViewById(R.id.btn_seven);
+        btnSeven.setOnClickListener(this);
+        
+        btnEight=(Button)findViewById(R.id.btn_eight);
+        btnEight.setOnClickListener(this);
+        
+        btnNine=(Button)findViewById(R.id.btn_nine);
+        btnNine.setOnClickListener(this);
+        
+        btnZero=(Button)findViewById(R.id.btn_zero);
+        btnZero.setOnClickListener(this);
+        
+        btnSave=(Button)findViewById(R.id.btn_save);
+        btnSave.setOnClickListener(this);
+        
+        btnCall=(Button)findViewById(R.id.btn_call);
+        btnCall.setOnClickListener(this);
+        
+        btnStar=(Button)findViewById(R.id.btn_star);
+        btnStar.setOnClickListener(this);
+        
+        btnHash=(Button)findViewById(R.id.btn_ash);
+        btnHash.setOnClickListener(this);
+        
+        btnDel=(Button)findViewById(R.id.btn_del);
+        btnDel.setOnClickListener(this);
+        
+        
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		
+		if(v.equals(btnOne))
+		{
+			txtNumber.append("1");
+		}
+		else if(v.equals(btnTwo))
+		{
+			txtNumber.append("2");
+		}
+		else if(v.equals(btnThree))
+		{
+			txtNumber.append("3");
+		}
+		else if(v.equals(btnFour))
+		{
+			txtNumber.append("4");
+		}
+		else if(v.equals(btnFive))
+		{
+			txtNumber.append("5");
+		}
+		else if(v.equals(btnSix))
+		{
+			txtNumber.append("6");
+		}
+		else if(v.equals(btnSeven))
+		{
+			txtNumber.append("7");
+		}
+		else if(v.equals(btnEight))
+		{
+			txtNumber.append("8");
+		}
+		else if(v.equals(btnNine))
+		{
+			txtNumber.append("9");
+		}
+		else if(v.equals(btnZero))
+		{
+			txtNumber.append("0");
+		}
+		else if(v.equals(btnStar))
+		{
+			txtNumber.append("*");
+		}
+		else if(v.equals(btnHash))
+		{
+			txtNumber.append("#");
+		}
+		else if(v.equals(btnDel))
+		{
+			String num=txtNumber.getText().toString();
+			if(num.length()>0)
+			{
+			num=num.substring(0,num.length()-1);
+			}
+			txtNumber.setText(num);
+		}
+		else if(v.equals(btnCall))
+		{
+			String num=txtNumber.getText().toString();
+			Intent it=new Intent(Intent.ACTION_CALL);
+			it.setData(Uri.parse("tel:"+num));
+			startActivity(it);
+		}
+		else if(v.equals(btnSave))
+		{
+			String num=txtNumber.getText().toString();
+			Intent intent = new Intent(Intent.ACTION_INSERT, ContactsContract.Contacts.CONTENT_URI);
+			intent.putExtra(ContactsContract.Intents.Insert.PHONE,num);
+			startActivity(intent);
+			
+		}
+			
+		
+	}
+    
+}
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical" >
+    
+      <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+       >
+        
+           
+            
+             <Button
+            android:id="@+id/btn_del"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Del"
+            android:layout_alignParentRight="true" />
+             
+              <EditText
+        android:id="@+id/txt_display"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/btn_del"
+        android:layout_alignBaseline="@id/btn_del" />
+        
+
+          </RelativeLayout>
+  
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btn_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="1" />
+
+        <Button
+            android:id="@+id/btn_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="2" />
+
+        <Button
+            android:id="@+id/btn_three"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="3" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btn_four"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="4" />
+
+        <Button
+            android:id="@+id/btn_five"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="5" />
+
+        <Button
+            android:id="@+id/btn_six"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="6" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btn_seven"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="7" />
+
+        <Button
+            android:id="@+id/btn_eight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="8" />
+
+        <Button
+            android:id="@+id/btn_nine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="9" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btn_star"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="*" />
+
+        <Button
+            android:id="@+id/btn_zero"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="0" />
+
+        <Button
+            android:id="@+id/btn_ash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="#" />
+    </LinearLayout>
+
+     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal" >
+    <Button
+        android:id="@+id/btn_call"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="call" />
+
+    <Button
+        android:id="@+id/btn_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="save" />
+    
+    </LinearLayout>
+
+</LinearLayout>
+
+
+
+
+
+ 8. Create an activity like a phone dialer with (1,2,3,4,5,6,7,8,9,0,*,#) buttons and call and save button on pressing the call button, it must call the phone number and on pressing the save button it must save the number to the phone contacts.
+Activity_main.xml
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:gravity="center"
+android:orientation="vertical" >
+<RelativeLayout
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+>
+<Button
+android:id="@+id/btn_del"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Del"
+android:layout_alignParentRight="true" />
+<EditText
+android:id="@+id/txt_display"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:layout_toLeftOf="@id/btn_del"
+android:layout_alignBaseline="@id/btn_del" />
+</RelativeLayout>
+<LinearLayout
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:layout_gravity="center"
+android:orientation="horizontal" >
+<Button
+android:id="@+id/btn_one"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:layout_gravity="center"
+android:text="1" />
+<Button
+android:id="@+id/btn_two"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:layout_gravity="center"
+android:text="2" />
+<Button
+android:id="@+id/btn_three"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:layout_gravity="center"
+android:text="3" />
+</LinearLayout>
+<LinearLayout
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:layout_gravity="center"
+android:orientation="horizontal" >
+<Button
+android:id="@+id/btn_four"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:layout_gravity="center"
+android:text="4" />
+<Button
+android:id="@+id/btn_five"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:layout_gravity="center"
+android:text="5" />
+<Button
+android:id="@+id/btn_six"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:layout_gravity="center"
+android:text="6" />
+</LinearLayout>
+<LinearLayout
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:layout_gravity="center"
+android:orientation="horizontal" >
+<Button
+android:id="@+id/btn_seven"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:layout_gravity="center"
+android:text="7" />
+<Button
+android:id="@+id/btn_eight"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:layout_gravity="center"
+android:text="8" />
+<Button
+android:id="@+id/btn_nine"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:layout_gravity="center"
+android:text="9" />
+</LinearLayout>
+<LinearLayout
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:layout_gravity="center"
+android:orientation="horizontal" >
+<Button
+android:id="@+id/btn_star"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:layout_gravity="center"
+android:text="*" />
+<Button
+android:id="@+id/btn_zero"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:layout_gravity="center"
+android:text="0" />
+<Button
+android:id="@+id/btn_ash"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:layout_gravity="center"
+android:text="#" />
+</LinearLayout>
+<LinearLayout
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:gravity="center"
+android:orientation="horizontal" >
+<Button
+android:id="@+id/btn_call"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:gravity="center"
+android:text="call" />
+<Button
+android:id="@+id/btn_save"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="save" />
+</LinearLayout>
+</LinearLayout>
+Manifest.xml
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+package="com.example.p8"
+android:versionCode="1"
+android:versionName="1.0" >
+<uses-sdk
+android:minSdkVersion="8"
+android:targetSdkVersion="18" />
+<uses-permission android:name="android.permission.CALL_PHONE"/>
+<application
+android:allowBackup="true"
+android:icon="@drawable/ic_launcher"
+android:label="@string/app_name"
+android:theme="@style/AppTheme" >
+<activity
+android:name="com.example.p8.MainActivity"
+android:label="@string/app_name" >
+<intent-filter>
+<action android:name="android.intent.action.MAIN" />
+<category android:name="android.intent.category.LAUNCHER" />
+</intent-filter>
+</activity>
+</application>
+</manifest>
+MainActivity.java
+package com.example.p8;
+import android.net.Uri;
+import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.app.Activity;
+import android.content.Intent;
+import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+public class MainActivity extends Activity implements OnClickListener {
+EditText txtNumber;
+Button btnOne,btnTwo,btnThree,btnFour,btnFive,btnSix,btnSeven,btnEight,btnNine,btnZero,btnCall,btnSave,btnDel,btnStar,btnHash;
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+super.onCreate(savedInstanceState);
+setContentView(R.layout.activity_main);
+txtNumber=(EditText)findViewById(R.id.txt_display);
+btnOne=(Button)findViewById(R.id.btn_one);
+btnOne.setOnClickListener(this);
+btnTwo=(Button)findViewById(R.id.btn_two);
+btnTwo.setOnClickListener(this);
+btnThree=(Button)findViewById(R.id.btn_three);
+btnThree.setOnClickListener(this);
+btnFour=(Button)findViewById(R.id.btn_four);
+btnFour.setOnClickListener(this);
+btnFive=(Button)findViewById(R.id.btn_five);
+btnFive.setOnClickListener(this);
+btnSix=(Button)findViewById(R.id.btn_six);
+btnSix.setOnClickListener(this);
+btnSeven=(Button)findViewById(R.id.btn_seven);
+btnSeven.setOnClickListener(this);
+btnEight=(Button)findViewById(R.id.btn_eight);
+btnEight.setOnClickListener(this);
+btnNine=(Button)findViewById(R.id.btn_nine);
+btnNine.setOnClickListener(this);
+btnZero=(Button)findViewById(R.id.btn_zero);
+btnZero.setOnClickListener(this);
+btnSave=(Button)findViewById(R.id.btn_save);
+btnSave.setOnClickListener(this);
+btnCall=(Button)findViewById(R.id.btn_call);
+btnCall.setOnClickListener(this);
+btnStar=(Button)findViewById(R.id.btn_star);
+btnStar.setOnClickListener(this);
+btnHash=(Button)findViewById(R.id.btn_ash);
+btnHash.setOnClickListener(this);
+btnDel=(Button)findViewById(R.id.btn_del);
+btnDel.setOnClickListener(this);
+}
+@Override
+public boolean onCreateOptionsMenu(Menu menu) {
+// Inflate the menu; this adds items to the action bar if it is present.
+getMenuInflater().inflate(R.menu.main, menu);
+return true;
+}
+@Override
+public void onClick(View v) {
+// TODO Auto-generated method stub
+if(v.equals(btnOne))
+{
+txtNumber.append("1");
+}
+else if(v.equals(btnTwo))
+{
+txtNumber.append("2");
+}
+else if(v.equals(btnThree))
+{
+txtNumber.append("3");
+}
+else if(v.equals(btnFour))
+{
+txtNumber.append("4");
+}
+else if(v.equals(btnFive))
+{
+txtNumber.append("5");
+}
+else if(v.equals(btnSix))
+{
+txtNumber.append("6");
+}
+else if(v.equals(btnSeven))
+{
+txtNumber.append("7");
+}
+else if(v.equals(btnEight))
+{
+txtNumber.append("8");
+}
+else if(v.equals(btnNine))
+{
+txtNumber.append("9");
+}
+else if(v.equals(btnZero))
+{
+txtNumber.append("0");
+}
+else if(v.equals(btnStar))
+{
+txtNumber.append("*");
+}
+else if(v.equals(btnHash))
+{
+txtNumber.append("#");
+}
+else if(v.equals(btnDel))
+{
+String num=txtNumber.getText().toString();
+if(num.length()>0)
+{
+num=num.substring(0,num.length()-1);
+}
+txtNumber.setText(num);
+}
+else if(v.equals(btnCall))
+{
+String num=txtNumber.getText().toString();
+Intent it=new Intent(Intent.ACTION_CALL);
+it.setData(Uri.parse("tel:"+num));
+startActivity(it);
+}
+else if(v.equals(btnSave))
+{
+String num=txtNumber.getText().toString();
+Intent intent = new Intent(Intent.ACTION_INSERT, ContactsContract.Contacts.CONTENT_URI);
+intent.putExtra(ContactsContract.Intents.Insert.PHONE,num);
+startActivity(intent);
+}
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+7th program alternate
+Part 1
+Manifest.xml
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+package="com.example.android_additionservice"
+android:versionCode="1"
+android:versionName="1.0" >
+<uses-sdk
+android:minSdkVersion="8"
+android:targetSdkVersion="18" />
+<application
+android:allowBackup="true"
+android:icon="@drawable/ic_launcher"
+android:label="@string/app_name"
+android:theme="@style/AppTheme" >
+<activity
+android:name="com.example.android_additionservice.MainActivity"
+android:label="@string/app_name" >
+<intent-filter>
+<action android:name="android.intent.action.MAIN" />
+<category android:name="android.intent.category.LAUNCHER" />
+</intent-filter>
+</activity>
+<service android:name=".AdditionService" android:process=":remote" > <intent-filter> <action android:name="service.Calculator" /> </intent-filter> </service>
+</application>
+</manifest>
+AdditionService.java
+package com.example.android_additionservice;
+import android.app.Service;
+import android.content.Intent;
+import android.os.IBinder;
+import android.os.RemoteException;
+import com.example.android_additionservice.IAdd;
+public class AdditionService extends Service {
+public IBinder onBind(Intent intent) {
+// TODO Auto-generated method stub
+return mBinder;
+}
+/**
+* IAdd definition is below
+*/
+private final IAdd.Stub mBinder = new IAdd.Stub() {
+@Override
+public int add(int num1, int num2) throws RemoteException {
+// TODO Auto-generated method stub
+return (num1 + num2);
+}
+@Override
+public int sub(int num1, int num2) throws RemoteException {
+// TODO Auto-generated method stub
+return (num1 - num2);
+}
+@Override public int mul(int num1, int num2) throws RemoteException {
+// TODO Auto-generated method stub return (num1 * num2);
+}
+};
+}
+.aidl file
+package com.example.android_additionservice;
+interface IAdd
+{
+int add(int num1, int num2);
+int sub(int num1, int num2);
+int mul(int num1, int num2);
+}
+
+
+Part 2
+The same .aidl file
+MainActivity.java
+package com.example.androidaidl_addition;
+import com.example.android_additionservice.IAdd;
+import com.example.androidaidl_addition.R;
+import android.os.Bundle;
+import android.os.IBinder;
+import android.os.RemoteException;
+import android.app.Activity;
+import android.app.Service;
+import android.content.ComponentName;
+import android.content.Intent;
+import android.content.ServiceConnection;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+public class MainActivity extends Activity implements OnClickListener {
+EditText etValue1, etValue2;
+Button bAdd,bsub,bmul;
+TextView mSum;
+protected IAdd AddService;
+ServiceConnection AddServiceConnection;
+/** Called when the activity is first created. */
+@Override
+public void onCreate(Bundle savedInstanceState) {
+super.onCreate(savedInstanceState);
+setContentView(R.layout.activity_main);
+etValue1 = (EditText) findViewById(R.id.value1);
+etValue2 = (EditText) findViewById(R.id.value2);
+mSum = (TextView) findViewById(R.id.sum);
+bAdd = (Button) findViewById(R.id.add);
+bAdd.setOnClickListener(this);
+bsub = (Button) findViewById(R.id.sub);
+bsub.setOnClickListener(this);
+bmul = (Button) findViewById(R.id.mul);
+bmul.setOnClickListener(this);
+initConnection();
+}
+void initConnection() {
+AddServiceConnection = new ServiceConnection() {
+@Override
+public void onServiceDisconnected(ComponentName name) {
+// TODO Auto-generated method stub
+AddService = null;
+Toast.makeText(getApplicationContext(), "Service Disconnected",
+Toast.LENGTH_SHORT).show();
+}
+@Override
+public void onServiceConnected(ComponentName name, IBinder service) {
+// TODO Auto-generated method stub
+AddService = IAdd.Stub.asInterface((IBinder) service);
+Toast.makeText(getApplicationContext(),
+"Addition Service Connected", Toast.LENGTH_SHORT)
+.show();
+}
+};
+if (AddService == null) {
+Intent it = new Intent();
+it.setAction("service.Calculator");
+// binding to remote service
+bindService(it, AddServiceConnection, Service.BIND_AUTO_CREATE);
+}
+}
+public void onClick(View v) {
+// TODO Auto-generated method stub
+if(v.equals(bAdd)) {
+int num1 = Integer.parseInt(etValue1.getText().toString());
+int num2 = Integer.parseInt(etValue2.getText().toString());
+try {
+mSum.setText("Result:" + AddService.add(num1, num2));
+} catch (RemoteException e) {
+// TODO Auto-generated catch block
+e.printStackTrace();
+}
+}
+if(v.equals(bsub)) {
+int num1 = Integer.parseInt(etValue1.getText().toString());
+int num2 = Integer.parseInt(etValue2.getText().toString());
+try {
+mSum.setText("Result:" + AddService.sub(num1, num2));
+} catch (RemoteException e) {
+// TODO Auto-generated catch block
+e.printStackTrace();
+}
+}
+if(v.equals(bmul)) {
+int num1 = Integer.parseInt(etValue1.getText().toString());
+int num2 = Integer.parseInt(etValue2.getText().toString());
+try {
+mSum.setText("Result:" + AddService.mul(num1, num2));
+} catch (RemoteException e) {
+// TODO Auto-generated catch block
+e.printStackTrace();
+}
+}
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+Updated 2nd program
+Write a program to create an activity with a text box and three buttons (save, open and create) open must allow to browse the text file from sdcard and must display the contents of the file on textbox, save button must save the contents of text box to file, create button must allow file user to create a new file and save the entered contents of the textbox.
+Activity_main.xml
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+android:gravity="center">
+<LinearLayout
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:orientation="horizontal"
+android:gravity="center">
+<Button android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Create new file"
+android:id="@+id/btn_create"
+android:layout_gravity="left"/>
+<Button android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Open"
+android:id="@+id/btn_open"
+android:layout_gravity="right"/>
+</LinearLayout>
+<TextView
+android:layout_width="fill_parent"
+android:layout_height="wrap_content"
+android:gravity="center"
+android:text="File:"
+android:id="@+id/lbl_file" />
+<EditText android:layout_width="match_parent"
+android:layout_height="200dp"
+android:id="@+id/txt_content"/>
+<Button android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Save"
+android:layout_gravity="center"
+android:id="@+id/btn_save"/>
+</LinearLayout>
+Dialog_layout.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical" >
+<TextView android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:text="Enter File Name"/>
+<EditText android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:id="@+id/txt_filename"/>
+</LinearLayout>
+Manifest.xml
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+package="com.example.p2"
+android:versionCode="1"
+android:versionName="1.0" >
+<uses-sdk
+android:minSdkVersion="8"
+android:targetSdkVersion="18" /> <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/> <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+<application
+android:allowBackup="true"
+android:icon="@drawable/ic_launcher"
+android:label="@string/app_name"
+android:theme="@style/AppTheme" >
+<activity
+android:name="com.example.p2.MainActivity"
+android:label="@string/app_name" >
+<intent-filter>
+<action android:name="android.intent.action.MAIN" />
+<category android:name="android.intent.category.LAUNCHER" />
+</intent-filter>
+</activity>
+</application>
+</manifest>
+MainActivity.java
+package com.example.p2;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import android.os.Bundle;
+import android.os.Environment;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+public class MainActivity extends Activity implements OnClickListener {
+TextView lblFile;
+EditText txtContent;
+Button btnCreate,btnSave,btnOpen;
+int FILE_CHOOSE_REQUEST=1;
+String filepath;
+String filename;
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+super.onCreate(savedInstanceState);
+setContentView(R.layout.activity_main);
+lblFile=(TextView)findViewById(R.id.lbl_file);
+txtContent=(EditText)findViewById(R.id.txt_content);
+btnCreate=(Button)findViewById(R.id.btn_create);
+btnCreate.setOnClickListener(this);
+btnSave=(Button)findViewById(R.id.btn_save);
+btnSave.setOnClickListener(this);
+btnOpen=(Button)findViewById(R.id.btn_open);
+btnOpen.setOnClickListener(this);
+}
+@Override
+public boolean onCreateOptionsMenu(Menu menu) {
+// Inflate the menu; this adds items to the action bar if it is present.
+getMenuInflater().inflate(R.menu.main, menu);
+return true;
+}
+public void onActivityResult(int requestCode,int resultCode, Intent data)
+{
+super.onActivityResult(requestCode, resultCode, data);
+if(resultCode==RESULT_OK)
+{
+filepath=data.getData().getPath();
+filename=filepath.substring(filepath.lastIndexOf("/")+1);
+filepath=filepath.substring(0,filepath.lastIndexOf("/"));
+readFromFile(filepath,filename);
+lblFile.setText(filepath+"/"+filename);
+}
+else
+{
+Toast.makeText(this,"Wrong Choice of File", Toast.LENGTH_LONG).show();
+}
+}
+public void writeToFile(String path,String filename)
+{
+try {
+FileOutputStream fileout=new FileOutputStream(new File(path+"/"+filename));
+OutputStreamWriter outputWriter=new OutputStreamWriter(fileout);
+outputWriter.write(txtContent.getText().toString());
+outputWriter.close();
+//display file saved message
+Toast.makeText(getBaseContext(), "File Saved successfully!",
+Toast.LENGTH_SHORT).show();
+} catch (Exception e) {
+Toast.makeText(getBaseContext(), e.getLocalizedMessage(),
+Toast.LENGTH_SHORT).show();
+}
+}
+public void readFromFile(String path,String filename)
+{
+try {
+FileInputStream fileIn=new FileInputStream(path+"/"+filename);
+InputStreamReader inputReader= new InputStreamReader(fileIn);
+BufferedReader br=new BufferedReader(inputReader);
+String data=br.readLine();
+while(data!=null)
+{
+txtContent.append(data);
+data=br.readLine();
+}
+br.close();
+} catch (Exception e) {
+Toast.makeText(getBaseContext(),e.getLocalizedMessage(),
+Toast.LENGTH_SHORT).show();
+}
+}
+public void onShowCreateDialog()
+{
+AlertDialog.Builder builder=new AlertDialog.Builder(this);
+final View dialogView=getLayoutInflater().inflate(R.layout.dialog_layout, null);
+builder.setView(dialogView);
+builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+@Override
+public void onClick(DialogInterface arg0, int arg1) {
+// TODO Auto-generated method stub
+EditText txtFilename=(EditText)dialogView.findViewById(R.id.txt_filename);
+filepath=Environment.getExternalStorageDirectory().getAbsolutePath();
+filename=txtFilename.getText().toString();
+File f=new File(filepath+"/"+filename);
+try {
+f.createNewFile();
+} catch (IOException e) {
+// TODO Auto-generated catch block
+Toast.makeText(getBaseContext(), ""+e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+}
+lblFile.setText(filepath+"/"+filename);
+}
+});
+builder.setNegativeButton("Cancel", null);
+AlertDialog dialog=builder.create();
+dialog.show();
+}
+@Override
+public void onClick(View v) {
+// TODO Auto-generated method stub
+if(v.equals(btnOpen))
+{
+Intent it=new Intent(Intent.ACTION_GET_CONTENT);
+//it.setType("*.*");
+it.setType("file/*");
+startActivityForResult(it, 0);
+}
+else if(v.equals(btnCreate))
+{
+onShowCreateDialog();
+}
+else if(v.equals(btnSave))
+{
+writeToFile(filepath, filename);
+}
+}
+}
